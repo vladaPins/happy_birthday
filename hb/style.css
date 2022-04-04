@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+h1  {
+  font-size: 2,8rem;
+line-height: 1;
+text-transform: uppercase;
+font-family: 'Press Start 2P', cursive;
+font-weight: 400;
+letter-spacing: 4px;
+text-align: center;
+/* margin: 58px 30px 0 0; */
+color: rgb(255, 253, 253);
+margin-top: 50px;
+
+}
+p {
+  color:azure;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 2rem;
+}
+.mt-4 
+{
+  margin-top: 5px;
+}
+header {
+  position: relative;
+  background-color: rgb(2, 2, 2);
+  height: 75vh;
+  min-height: 25rem;
+  width: 100%;
+  overflow: hidden;
+  
+}
+
+header video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+header .container {
+  position: relative;
+  z-index: 2;
+}
+
+header .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+/* Media Query for devices withi coarse pointers and no hover functionality */
+
+/* This will use a fallback image instead of a video for devices that commonly do not support the HTML5 video element */
+
+@media (pointer: coarse) and (hover: none) {
+  header {
+    background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
+  }
+
+  header video {
+    display: none;
+  }
+}
+
+/*position*/
+
+.position {
+  border: 4px solid black;
+  margin-top: 40px;
+  padding: 20px;
+}
+.box {
+  width: 50px;
+  height: 50px;
+  background:lightcoral;
+}
+h2 {
+  position	: absolute;
+    top		: 250px;
+    left		: 0;
+    width		: 100%;
+}
+h2 span {
+	color			: white;
+	font-size: 20px;
+	letter-spacing		: -1px;
+	padding			: 0px;
+}
+h2 span.spacer {
+	padding	: 0 0px;
+}
+.img1 {
+
+    position	: relative;
+   
+}
+
+    
+body {
+  font-family: 'Times New Roman', Times, serif;
+  background-color:black;
+  
+}
+
+
+
+.spark {
+  background-color: #DE4A00;
+  font-family: 'Helvetica', sans-serif;
+  visibility: hidden;
+  position:relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 30%;
+  box-shadow: 0 0 10px #AB000B;
+  }
+  .text-lg-start {
+    text-align: center;
+  }
+  .container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  .video {
+    display: block;
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .container {
+    max-width: 900px;
+    min-width: 900px;
+  }
+
+
+.img-wrapper {
+  display: inline-block; 
+  max-height: 100%;
+  max-width: 100%;
+  padding: 0;
+  overflow: hidden;
+  
+  background-size: cover;
+  background-repeat: no-repeat;
+
+}
+
+
+.img-wrapper .img-thumbnail {
+  vertical-align: top;
+
+}
+
+.img-wrapper .img-thumbnail:hover {
+  opacity: 0;
+}
+
+.img1 {
+  background-image: url(../src/img/main.jpeg); 
+}
+
+.img2 {
+  background-image: url(../src/img/defender.jpg); 
+  position: relative;
+}
+.img3 {
+  background-image: url(../src/img/energizer.jpg);  position: relative;
+}
+.img4 {
+  background-image: url(../src/img/clever.jpg);  position: relative;
+}
+.img5 {
+  background-image: url(../src/img/vypinderya.jpg);  position: relative;
+}
+.img6 {
+  background-image: url(../src/img/swimmer.jpg);  position: relative;
+}
+.img7 {
+  background-image: url(../src/img/powerful.jpg);  position: relative;
+}
+.img8 {
+  background-image: url(../src/img/king.jpg);  position: relative;
+}
+.img9 {
+  background-image: url(../src/img/kind.jpg);  position: relative;
+}
+.img10 {
+  background-image: url(../src/img/gulliver.jpg);  position: relative;
+}
+.img11 {
+  background-image: url(../src/img/hostess.jpg);  position: relative;
+}
+.img12 {
+  background-image: url(../src/img/coffee\ lover.jpg);  position: relative;
+}
+.img13 {
+  background-image: url(../src/img/dormouse.jpg);  position: relative;
+}
+.img14 {
+  background-image: url(../src/img/ready.jpg);  position: relative;
+}
+.img15 {
+  background-image: url(../src/img/the\ best\ programmer.jpg);  position: relative;
+}
+.img16 {
+  background-image: url(../src/img/snowbord.jpg);  position: relative;
+}
+.img17 {
+  background-image: url(../src/img/suppot.jpg);  position: relative;
+}
+.img18 {
+  background-image: url(../src/img/wild.jpg);  position: relative;
+}
+.img19 {
+  background-image: url(../src/img/moda.jpg);  position: relative;
+}
+.img20 {
+  background-image: url(../src/img/teacher.jpg);  position: relative;
+}
+.img21 {
+  background-image: url(../src/img/beststudent.jpg);  position: relative;
+}
+.img22 {
+  background-image: url(../src/img/gitar.jpg);  position: relative;
+}
+.img23 {
+  background-image: url(../src/img/pantingyourlife.jpg);  position: relative;
+}
+
+.img24 {
+  background-image: url(../src/img/dreamer.jpg);  position: relative;
+}
+.img25 {
+  background-image: url(../src/img/purposeful.jpg);  position: relative;
+}
+.img26 {
+  background-image: url(../src/img/magic\ wand.jpg);  position: relative;
+}
+.img27 {
+  background-image: url(../src/img/perfectpapa.jpg);  position: relative;
+}
+
+.img28 {
+  background-image: url(../src/img/papa.jpg);  position: relative;
+}
+.img29 {
+  background-image: url(../src/img/ideal\ husband.jpg);  position: relative;
+}
+.img30 {
+  background-image: url(../src/img/loving.jpg);  position: relative;
+}
+
+.img31 {
+  background-image: url(../src/img/darling.jpg);  position: relative;
+}
+.end {  font-size: 2,8rem;
+  line-height: 1;
+  text-transform: uppercase;
+  font-family: 'Press Start 2P', cursive;
+  font-weight: 400;
+  letter-spacing: 4px;
+  text-align: center;
+  /* margin: 58px 30px 0 0; */
+  color: rgb(255, 253, 253);
+  margin-top: 100px;
+  }
+
+
