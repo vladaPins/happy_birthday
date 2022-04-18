@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<script src="js/TweenMax.min.js"></script>
+<script>
+  var density = 70,
+    speed = 2,
+    winHeight = window.innerHeight,
+    winWidth = window.innerWidth,
+    start = {
+      yMin: winHeight - 50,
+      yMax: winHeight,
+      xMin: (winWidth / 2) + 10,
+      xMax: (winWidth / 2) + 40,
+      scaleMin: 0.1,
+      scaleMax: 0.25,
+      scaleXMin: 0.1,
+      scaleXMax: 1,
+      scaleYMin: 1,
+      scaleYMax: 2,
+      opacityMin: 0.1,
+      opacityMax: 0.4
+    },
+    mid = {
+      yMin: winHeight * 0.4,
+      yMax: winHeight * 0.9,
+      xMin: winWidth * 0.1,
+      xMax: winWidth * 0.9,
+      scaleMin: 0.2,
+      scaleMax: 0.8,
+      opacityMin: 0.5,
+      opacityMax: 1
+    },
+    end = {
+      yMin: -100,
+      yMax: -100,
+      xMin: -50,
+      xMax: winWidth + 100,
+      scaleMin: 0.1,
+      scaleMax: 1,
+      opacityMin: 0.4,
+      opacityMax: 0.7
+    };
+
+  function range(map, prop) {
+    var min = map[prop + 'Min'],
+      max = map[prop + 'Max'];
+    return min + (max - min) * Math.random();
+  }
+
+  function sign() {
+    return Math.random() < 0.5 ? -1 : 1;
+  }
+
+  function randomEase(easeThis, easeThat) {
+    if (Math.random() < 0.5) {
+      return easeThat;
+    }
+    return easeThis;
+  }
+
+  function spawn(particle) {
+    var wholeDuration = (10 / speed) * (0.7 + Math.random() * 0.4),
+      delay = wholeDuration * Math.random(),
+      partialDuration = (wholeDuration + 1) * (0.2 + Math.random() * 0.3);
+    TweenLite.set(particle, {
+      y: range(start, 'y'),
+      x: range(start, 'x'),
+      scaleX: range(start, 'scaleX'),
+      scaleY: range(start, 'scaleY'),
+      scale: range(start, 'scale'),
+      opacity: range(start, 'opacity'),
+      visibility: 'hidden'
+    });
+    // Moving upward
+    TweenLite.to(particle, partialDuration, {
+      delay: delay,
+      y: range(mid, 'y'),
+      ease: randomEase(Linear.easeOut, Back.easeInOut)
+    });
+    TweenLite.to(particle, wholeDuration - partialDuration, {
+      delay: partialDuration + delay,
+      y: range(end, 'y'),
+      ease: Back.easeIn
+    });
+    //Moving on axis X
+    TweenLite.to(particle, partialDuration, {
+      delay: delay,
+      x: range(mid, 'x'),
+      ease: Power1.easeOut
+    });
+    TweenLite.to(particle, wholeDuration - partialDuration, {
+      delay: partialDuration + delay,
+      x: range(end, 'x'),
+      ease: Power1.easeIn
+    });
+    //opacity and scale
+    partialDuration = wholeDuration * (0.5 + Math.random() * 0.3);
+    TweenLite.to(particle, partialDuration, {
+      delay: delay,
+      scale: range(mid, 'scale'),
+      autoAlpha: range(mid, 'opacity'),
+      ease: Linear.easeNone
+    });
+    TweenLite.to(particle, wholeDuration - partialDuration, {
+      delay: partialDuration + delay,
+      scale: range(end, 'scale'),
+      autoAlpha: range(end, 'opacity'),
+      ease: Linear.easeNone,
+      onComplete: spawn,
+      onCompleteParams: [particle]
+    });
+  }
+  window.onload = createParticle;
+
+  function createParticle() {
+    var i, particleSpark;
+    for (i = 0; i < density; i += 1) {
+      particleSpark = document.createElement('div');
+      particleSpark.classList.add('spark');
+      document.body.appendChild(particleSpark);
+      spawn(particleSpark);
+    }
+  }
+</script>
+
+<!-- <script> -->
+<!-- // Load the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/player_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // Replace the 'ytplayer' element with an <iframe> and
+  // YouTube player after the API code downloads.
+  var player;
+  function onYouTubePlayerAPIReady() {
+    player = new YT.Player('ytplayer', {
+      height: '360',
+      width: '640',
+      videoId: 'M7lc1UVf-VE'
+    }); -->
+<!-- } -->
+<!-- </script> -->
+
+<body bgcolor="black">
+  <header>
+
+    <!-- This div is  intentionally blank. It creates the transparent black overlay over the video which you can modify in the CSS -->
+    <!-- <div class="overlay"></div> -->
+
+    <!-- The HTML5 video element that will create the background video on the header -->
+    <!-- <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"> --> -->
+    <!-- <source src="https://youtu.be/scW3OtWoXc4> -->
+    <!-- </video>  -->
+
+    <div class=video></div>
+    <iframe class=video frameborder="0" width="70%" height="110%" type="text/html" allowfullscreen
+      src="https://www.youtube.com/embed/scW3OtWoXc4?autoplay=1&showinfo=0&playsinline=1" allow="autoplay"></iframe> -->
+
+
+    <!-- " src="https://www.youtube.com/embed/scW3OtWoXc4?controls=1&&autoplay=1&modestbranding=1&playlist=1&loop=1&enablejsapi=0&fs=1&start=1 -->
+
+
+    <!-- 
+    <!-- The header content -->
+    <div class="container h-100">
+      <div class="d-flex h-100 text-center align-items-center">
+        <div class="w-100 text-black">
+
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page section example for content below the video header -->
+  <section class="my-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+
+
+        </div>
+      </div> -->
+
+      <!-- content -->
+      <div class="container">
+
+        <h1 class="fw-light text-center">My ideal</h1>
+        <p class=" mb-0">Happy Birthday!</p>
+        <hr class="mt-2 mb-5">
+
+        <div class="row text-center ">
+          <!-- <div class="vlada-wrapper"> -->
+          <!-- <div class="vlada"> -->
+          <!-- <img src="img/test1.jpeg" alt="Pic not found"> -->
+          <!-- </div> -->
+          <!-- </div> -->
+
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img1">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> superman </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img2">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> defender </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img3">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> energizer </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img4">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> cleverest </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img5">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> vypinderya </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img6">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> swimmer </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img7">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> powerful </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img8">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> king </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img9">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> most kind </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img10">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> gulliver </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img11">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> housewifely </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img12">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> coffe lover </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img13">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> dormouse </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img14">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> always ready </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img15">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> the best programmer </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img16">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> better than Loginov </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img17">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> my support </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img18">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> wild </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img19">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> fashinable </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img20">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> the best teacher </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img21">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> the best student </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img22">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> better than Jimi Hendrix </span></h2>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img23">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> creator of your life </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img24">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> dreamer </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img25">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> purposeful </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img26">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> magic wand </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img27">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> my helper </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img28">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> the best pa-pa </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img29">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> ideal husband </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img30">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> loving </span></h2>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 img-wrapper img31">
+
+            <img class="img-fluid img-thumbnail" src="img/lamp.jpg" alt="">
+            <h2><span class="spacer"> darling </span></h2>
+          </div>
+
+
+
+        </div>
+
+        <audio controls style="width:0;max-width:0;" autoplay="autoplay">
+          <source src="music/hb.mp3" type="audio/mp3">
+        </audio>
+
+
+      </div>
+    </div>
+    </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"></script>
+
+
+    <p class="end">I LOVE YOU!</p>
+
+</body>
+
+</html>
